@@ -1,21 +1,36 @@
+#################################################################################################################
+## The four adjacent digits in the 1000-digit number that have the greatest product are 9 × 9 × 8 × 9 = 5832.  ##
+##                                                                                                             ##
+## 731671765313306249192251196744265747423553491949349698352031277450632623957831801698480186947885184385      ##
+## 861560789112949495459501737958331952853208805511125406987471585238630507156932909632952274430435576689664   ##
+## 895044524452316173185640309871112172238311362229893423380308135336276614282806444486645238749303589072962   ##
+## 904915604407723907138105158593079608667017242712188399879790879227492190169972088809377665727333001053367   ##
+## 881220235421809751254540594752243525849077116705560136048395864467063244157221553975369781797784617406495   ##
+## 514929086256932197846862248283972241375657056057490261407972968652414535100474821663704844031998900088952   ##
+## 434506585412275886668811642717147992444292823086346567481391912316282458617866458359124566529476545682848   ##
+## 912883142607690042242190226710556263211111093705442175069416589604080719840385096245544436298123098787992   ##
+## 724428490918884580156166097919133875499200524063689912560717606058861164671094050775410022569831552000559   ##
+## 3572972571636269561882670428252483600823257530420752963450                                                  ##
+##                                                                                                             ##
+## Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the      ##
+## value of this product?                                                                                      ##
+#################################################################################################################
+
 import time
-start_time = time.time()
+start_time = time.time() # Get the start time
+# This is the number
 bigNum=7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846174064955149290862569321978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450
-numDigits=len(list(str(bigNum)))
-startIndex = 0 
-endIndex = 13
-prodArray=[]
-listOfDigits=[]
-digitListIndex=-1
-while endIndex < 1001:
-   mult=1
-   checkList=list(str(bigNum))[startIndex:endIndex]
-   listOfDigits.append(checkList)
-   digitListIndex+=1
-   for i in range(0,len(checkList)):
-      mult=mult*int(checkList[i])
-   prodArray.append(mult)
-   startIndex+=1
-   endIndex+=1   
-print(max(prodArray))
-print("Execution time: ",(time.time() - start_time)/60," minutes.")
+numDigits=len(list(str(bigNum))) # Split the number into a list of its digits
+startIndex = 0 # Starting index variable initialized to 0
+endIndex = 13 # End index variable initialized to 13 (for 13 consecutive digits)
+prodArray=[] # Product array will contain the products of every 13 consecutive digits
+while endIndex < 1001: # Till the last digit of the number is reached
+   mult=1 # Initialize variable 'mult' to 1; the first digit for the current iteration will be multiplied by this first
+   checkList=list(str(bigNum))[startIndex:endIndex] # Select digits 'startIndex' through 'endIndex' from the list containing the digits of the number and put them in an array
+   for i in range(0,len(checkList)): # Loop through this array
+      mult=mult*int(checkList[i]) # Get the product of all the numbers in the array
+   prodArray.append(mult) # Append the product to an array
+   startIndex+=1 # Increase the startIndex variable by 1
+   endIndex+=1 # Increase the endIndex variable by 1
+print(max(prodArray)) # Once endIndex has reached 1001, print the largest value from the array containing the products
+print("Execution time: ",(time.time() - start_time)/60," minutes.") # Report the time taken to do this
